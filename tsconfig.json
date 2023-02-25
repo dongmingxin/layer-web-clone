@@ -5,7 +5,6 @@
     "baseUrl": ".",
     "types": [
       "vite-plugin-pages/client",
-      "vite-plugin-vue-component-preview/client",
       "vite-plugin-vue-layouts/client",
     ],
     "paths": {
