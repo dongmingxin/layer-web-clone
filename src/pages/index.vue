@@ -32,26 +32,30 @@ const CarcouselItems: string[] = [
   employmentLeading2022,
 ]
 
-const assistService: { title: string; detail: string; icon: string }[] = [
+const assistService: { title: string; detail: string; icon: string; to: string }[] = [
   {
     title: 'Unfair Dismissal',
     detail: 'If you have been dismissed within the last 21 days and were employed for at least six months you may be eligible to make an unfair dismissal claim.',
     icon: cta1,
+    to: 'Unfair-Dismissal',
   },
   {
     title: 'General Protections',
     detail: 'If adverse action (including dismissal) has been taken against you for a prohibited reason, you may be eligible to make a general protections claim',
     icon: cta2,
+    to: 'General-Protections',
   },
   {
     title: 'Contract Advice',
     detail: 'Employment contracts may contain clauses that favour the employer or unfairly restrict what you can do both during and after the employment.',
     icon: cta3,
+    to: 'Contract-Advice',
   },
   {
     title: 'Workplace Bullying',
     detail: 'If you have been bullied or harassed at work, we can assist you in preparing a formal complaint to your employer.',
     icon: cta4,
+    to: 'Workplace-Bullying',
   },
 ]
 </script>
@@ -70,7 +74,9 @@ const assistService: { title: string; detail: string; icon: string }[] = [
         <span>Lawyers</span>
       </div>
       <button class="bg-[#25ade3] text-white mt-5 px-[17px] py-[7px] rounded-full font-extrabold text-[15px]">
-        Find Out More
+        <RouterLink to="/services">
+          Find Out More
+        </RouterLink>
       </button>
     </div>
   </div>
@@ -124,13 +130,15 @@ const assistService: { title: string; detail: string; icon: string }[] = [
         class="w-[230px] h-[230px] container-size"
         @mouseover="() => activeHoveredIndex = index" @mouseleave="() => activeHoveredIndex = null"
       >
-        <div v-if="activeHoveredIndex === index" class="w-full h-full relative bg-[#292929] flex flex-col items-center justify-center">
-          <span class="text-[22px] font-[500] text-[#25ade3]">
-            {{ item.title.split(' ')[0] }}
-          </span>
-          <span class="text-[22px] font-[500] text-[#25ade3] leading-3">
-            {{ item.title.split(' ')[1] }}
-          </span>
+        <div v-if="activeHoveredIndex === index" class="w-full h-full relative bg-[rgb(80,79,79)] flex flex-col items-center justify-center">
+          <RouterLink :to="`/services/${item.to}`" class="flex flex-col text-center">
+            <span class="text-[22px] font-[500] text-[#25ade3]">
+              {{ item.title.split(' ')[0] }}
+            </span>
+            <span class="text-[22px] font-[500] text-[#25ade3] leading-3">
+              {{ item.title.split(' ')[1] }}
+            </span>
+          </RouterLink>
           <p class="text-white text-[13px] w-9/12 overflow-hidden h-2/3 mt-5">
             {{ item.detail }}
           </p>
@@ -149,6 +157,21 @@ const assistService: { title: string; detail: string; icon: string }[] = [
       </div>
     </div>
   </div>
+  <PageIntroLayout class="pb-[60px] bg-[#25ade3]" border-class="bg-white">
+    <template #title>
+      <Title>
+        Testimonials
+      </Title>
+    </template>
+    <template #content>
+      <Text class="text-white">
+        Very happy with the outcome Trent achieved representing me in an
+        employment related issue. Trent's knowledge and expertise were instrumental
+        in achieving a great result in a short period of time. Trent was forthright and
+        straightforward from the very beginning. Highly recommended!
+      </Text>
+    </template>
+  </PageIntroLayout>
 </template>
 
 <style scoped lang="scss">
@@ -159,3 +182,8 @@ const assistService: { title: string; detail: string; icon: string }[] = [
   }
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: home
+</route>

@@ -68,7 +68,7 @@ const topNavItem: { name: string; to: string }[] = [
           </div>
           <div v-else>
             <ul class="flex flex-row space-x-4 text-[#8D8C8A]">
-              <li v-for="item in topNavItem" :key="item.name">
+              <li v-for="item in topNavItem" :key="item.name" class="hover:text-[#25ade3]">
                 <RouterLink :to="item.to" exact-active-class="text-[#25ade3]">
                   {{ item.name }}
                 </RouterLink>
@@ -88,7 +88,7 @@ const topNavItem: { name: string; to: string }[] = [
     </div>
   </div>
   <div v-if="sme" :class="`${navClass} nav_content px-4`">
-    <div v-for="item in topNavItem" :key="item.name" class="text-[#8D8C8A] py-1 text-sm">
+    <div v-for="item in topNavItem" :key="item.name" class="text-[#8D8C8A] py-1 text-sm hover:text-[#25ade3]">
       <RouterLink :to="item.to" exact-active-class="text-[#25ade3]">
         {{ item.name }}
       </RouterLink>
