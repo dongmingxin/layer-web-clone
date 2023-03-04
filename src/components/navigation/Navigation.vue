@@ -2,11 +2,13 @@
 import { useRouter } from 'vue-router'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
+import BookModal from '../bookModal/BookModal.vue'
 import navIcon from '@/assets/nav_icon.png'
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const sme = breakpoints.smallerOrEqual('md')
 const isNavExpended = ref<boolean>(false)
+const showModal = ref<boolean>(false)
 
 const toggleNavExpend = (): boolean => isNavExpended.value = !isNavExpended.value
 
@@ -16,6 +18,18 @@ watch(isNavExpended, (newValue, oldValue) => {
   // eslint-disable-next-line no-console, @typescript-eslint/no-use-before-define
   console.log(navClass.value)
 })
+
+const closeModal = (event: MouseEvent) => {
+  if (event)
+    event.stopPropagation()
+  showModal.value = false
+  document.body.classList.remove('modal-open')
+}
+
+const toggleModal = () => {
+  showModal.value = !showModal.value
+  document.body.classList.toggle('modal-open')
+}
 
 const navClass = computed(() => (isNavExpended.value && sme) ? 'nav_expended' : 'nav_collapsed')
 
@@ -77,10 +91,10 @@ const topNavItem: { name: string; to: string }[] = [
           </div>
         </div>
         <div class="flex space-x-2">
-          <button class="bg-[#58585a] text-white px-6 py-2 rounded-full font-extrabold text-xs">
+          <RouterLink to="/contact" class="bg-[#58585a] text-white px-6 py-2 rounded-full font-extrabold text-xs">
             Contact
-          </button>
-          <button class="bg-[#25ade3] text-white px-4 py-2 rounded-full font-extrabold text-xs">
+          </RouterLink>
+          <button class="bg-[#25ade3] text-white px-4 py-2 rounded-full font-extrabold text-xs" @click="toggleModal">
             Book Now
           </button>
         </div>
@@ -94,6 +108,7 @@ const topNavItem: { name: string; to: string }[] = [
       </RouterLink>
     </div>
   </div>
+  <BookModal :show-modal="showModal" :on-close="closeModal" />
 </template>
 
 <style lang="scss">

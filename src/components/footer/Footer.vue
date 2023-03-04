@@ -95,7 +95,7 @@ const followUsIconList: { icon: string; href: string }[] = [
         Important Links
       </div>
       <ul class="mb-4">
-        <li v-for="item in importantLinks" :key="item.linkName" class="leading-10 flex items-center">
+        <li v-for="item in importantLinks" :key="item.linkName" class="leading-10 flex items-center cursor-pointer hover:text-[#25ade3]">
           <img :src="arrowIcon" alt="list arrow" class="pr-1">
           {{ item.linkName }}
         </li>
@@ -114,7 +114,7 @@ const followUsIconList: { icon: string; href: string }[] = [
           :key="item.icon"
           :src="item.icon"
           alt="social links"
-          class="p"
+          class="cursor-pointer"
         >
       </div>
       <div class="flex flex-col text-[#717171]">

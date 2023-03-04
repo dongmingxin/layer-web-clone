@@ -2,10 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Avenir Medium";
+  src: url("../assets/fonts/Avenir Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next LT Pro";
+  src: url("../assets/fonts/Avenir Next LT Pro Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body,
 #app {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: "Avenir Next LT Pro";
+}
+
+.modal-open {
+  overflow: hidden;
 }

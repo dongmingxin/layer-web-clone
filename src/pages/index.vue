@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+import BookModal from '@/components/bookModal/BookModal.vue'
 import PageIntroLayout from '@/components/pageIntroLayout/PageIntroLayout.vue'
 import Title from '@/components/pageIntroLayout/Title.vue'
 import Subtitle from '@/components/pageIntroLayout/Subtitle.vue'
@@ -22,6 +23,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind)
 const sme = breakpoints.smallerOrEqual('md')
 
 const activeHoveredIndex = ref<number | null>(null)
+const showModal = ref<boolean>(false)
 
 const CarcouselItems: string[] = [
   sealReward,
@@ -58,6 +60,18 @@ const assistService: { title: string; detail: string; icon: string; to: string }
     to: 'Workplace-Bullying',
   },
 ]
+
+const closeModal = (event: MouseEvent) => {
+  if (event)
+    event.stopPropagation()
+  showModal.value = false
+  document.body.classList.remove('modal-open')
+}
+
+const toggleModal = () => {
+  showModal.value = !showModal.value
+  document.body.classList.toggle('modal-open')
+}
 </script>
 
 <template>
@@ -68,7 +82,7 @@ const assistService: { title: string; detail: string; icon: string; to: string }
       class="w-full h-full object-cover -z-50"
     >
     <div class="absolute top-[20%] left-[8%] 2xl:left-[16%]">
-      <div class="flex flex-col text-white font-extrabold text-2xl md:text-5xl xl:text-7xl md:leading-relaxed">
+      <div class="flex flex-col text-white font-extrabold text-2xl md:text-5xl xl:text-7xl font-sans">
         <span>Your</span>
         <span>Employment</span>
         <span>Lawyers</span>
@@ -107,10 +121,12 @@ const assistService: { title: string; detail: string; icon: string; to: string }
         expertise and abilities in employment and workplace relations.
       </Text>
       <div class="flex space-x-2 pt-[50px]">
-        <button class="bg-[#25ade3] text-white w-[113px] py-[12px] rounded-full font-extrabold text-[12px]">
-          More
-        </button>
-        <button class="bg-[#25ade3] text-white w-[113px] py-[12px] rounded-full font-extrabold text-[12px]">
+        <RouterLink to="/about">
+          <button class="bg-[#25ade3] text-white w-[113px] py-[12px] rounded-full font-extrabold text-[12px]">
+            More
+          </button>
+        </RouterLink>
+        <button class="bg-[#25ade3] text-white w-[113px] py-[12px] rounded-full font-extrabold text-[12px]" @click="toggleModal">
           Book Now
         </button>
       </div>
@@ -172,6 +188,7 @@ const assistService: { title: string; detail: string; icon: string; to: string }
       </Text>
     </template>
   </PageIntroLayout>
+  <BookModal :show-modal="showModal" :on-close="closeModal" />
 </template>
 
 <style scoped lang="scss">
