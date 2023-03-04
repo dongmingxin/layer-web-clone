@@ -1,4 +1,11 @@
 <script setup lang="ts">
+const props = defineProps({
+  toggleLogin: {
+    type: Function,
+    required: true,
+  },
+})
+
 const mockAppointmentData: { name: string; price: string; preview: string }[] = [
   {
     name: 'Telephone Consultation (Principal Lawyer)',
@@ -39,7 +46,7 @@ const mockAppointmentData: { name: string; price: string; preview: string }[] = 
       <div class="w-full flex justify-end px-2 text-[14px]">
         <div>
           Returning?
-          <span class="text-[#00b0f0] cursor-pointer">
+          <span class="text-[#00b0f0] cursor-pointer" @click.prevent.self="() => props.toggleLogin()">
             login
           </span>
         </div>
