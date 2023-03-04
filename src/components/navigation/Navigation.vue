@@ -67,7 +67,9 @@ const topNavItem: { name: string; to: string }[] = [
   <div class="w-full flex justify-center">
     <div class="flex flex-col w-full p-4 xl:flex-row md:justify-between lg:w-10/12 md:w-11/12 2xl:w-8/12 md:py-9 ">
       <div class="flex justify-center mb-5 md:m-0">
-        <img :src="navIcon" alt="nav icon">
+        <RouterLink to="/">
+          <img :src="navIcon" alt="nav icon">
+        </RouterLink>
       </div>
       <div class="flex justify-between pt-[8px] items-center w-full xl:pl-20 xl:pt-0">
         <div>

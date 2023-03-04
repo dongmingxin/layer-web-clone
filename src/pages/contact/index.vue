@@ -18,33 +18,6 @@ const errors = ref({
   message: '',
 })
 
-const inputs: { modelName: Ref<string>; error: string; type: string; placeholder: string }[] = [
-  {
-    modelName: name.value,
-    error: 'phone',
-    type: 'text',
-    placeholder: 'Name',
-  },
-  {
-    modelName: email.value,
-    error: 'email',
-    type: 'email',
-    placeholder: 'Email',
-  },
-  {
-    modelName: phone.value,
-    error: 'phone',
-    type: 'tel',
-    placeholder: 'Phone',
-  },
-  {
-    modelName: message.value,
-    error: 'message',
-    type: 'text',
-    placeholder: 'Message',
-  },
-]
-
 const schema = yup.object({
   name: yup.string().required(),
   email: yup.string().email().required(),
@@ -72,9 +45,9 @@ const submitForm = async () => {
     message.value = ''
     alert('Form submitted successfully')
   }
-  catch (err) {
+  catch (err: any) {
     showErrors.value = true
-    errors.value = err.inner.reduce((acc, { path, message }) => {
+    errors.value = err.inner.reduce((acc: any, { path, message }: any) => {
       acc[path] = message
       return acc
     }, {})
